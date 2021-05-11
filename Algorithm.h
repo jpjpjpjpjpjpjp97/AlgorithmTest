@@ -11,9 +11,9 @@ struct Algorithm{
     Algorithm();
     virtual ~Algorithm();
 
-    bool firstFit(int number, std::vector<Cart*> carts);
-    bool firstFitDecreasing(int number, std::vector<Cart*> carts);
-    bool bestFit(int number, std::vector<Cart*> carts);
+    bool firstFit(int number, std::vector<Cart*> &carts);
+    bool firstFitDecreasing(int number, std::vector<Cart*> &carts);
+    bool bestFit(int number, std::vector<Cart*> &carts);
 };
 
 

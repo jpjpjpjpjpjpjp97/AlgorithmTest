@@ -8,7 +8,7 @@
 Algorithm::Algorithm() {}
 Algorithm::~Algorithm() {}
 
-bool Algorithm::firstFit(int number, std::vector<Cart*> carts) {
+bool Algorithm::firstFit(int number, std::vector<Cart*> &carts) {
     bool placed = false;
 
     // Now call first fit
@@ -24,7 +24,7 @@ bool Algorithm::firstFit(int number, std::vector<Cart*> carts) {
     return placed;
 }
 
-bool Algorithm::firstFitDecreasing(int number, std::vector<Cart*> carts) {
+bool Algorithm::firstFitDecreasing(int number, std::vector<Cart*> &carts) {
     // Vector to sort numbers
     std::vector<int> allNumbers;
     allNumbers.push_back(number);
@@ -62,7 +62,9 @@ bool Algorithm::firstFitDecreasing(int number, std::vector<Cart*> carts) {
     }
 }
 
-bool Algorithm::bestFit(int number, std::vector<Cart*> carts) {
+bool Algorithm::bestFit(int number, std::vector<Cart*> &carts) {
+    const int MAX_CARTS = 5;
+    int max_vector_number;
     bool placed = false;
     int bestCart = 0;
     int bestDifference = carts[0]->getMaxNumber() - carts[0]->sumNumbers();
@@ -78,9 +80,20 @@ bool Algorithm::bestFit(int number, std::vector<Cart*> carts) {
         }
     }
 
+
     // If a place for the number is found, place it there.
     if (placed){
         carts[bestCart]->addNumber(number);
+    }
+    // Add more carts if carts less than 5 and all carts are full. Place number in there.
+    else if (carts.size() < MAX_CARTS){
+        std::cout << "Carts are full, ADDING NEW CART" << std::endl;
+        max_vector_number = rand() %8 + 12;
+        std::vector <int> newV;
+        Cart *newCart = new Cart(max_vector_number, newV);
+        carts.push_back(newCart);
+        carts[carts.size()-1]->addNumber(number);
+        placed = true;
     }
 
     return placed;

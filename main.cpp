@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Algorithm.h"
 #include "Cart.h"
-#include "iostream"
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
